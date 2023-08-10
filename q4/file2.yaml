@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: high-cpu-memory-pod-pending
+spec:
+  containers:
+    - name: cpu-memory-hungry-container
+      image: busybox
+      command: ["sh", "-c", "while true; do :; done"]
+      resources:
+        requests:
+          cpu: "2000m"   # Requesting 2000 milliCPU (2 CPU cores)
+          memory: "1Gi"  # Requesting 1 gigabyte of memory

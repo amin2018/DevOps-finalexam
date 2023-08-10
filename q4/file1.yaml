@@ -1,0 +1,23 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: pending-pods-report
+spec:
+  schedule: "* * * * *"  # Every minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: pending-pods-container
+              image: bitnami/kubectl
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  a=0
+                  until [ $a -gt 5 ]; do
+                    echo "Iteration $a"
+                    kubectl get pods --field-selector=status.phase=Pending,spec.nodeName= -o custom-columns=NAME:.metadata.name,CREATED:.metadata.creationTimestamp --sort-by=.metadata.creationTimestamp -o wide
+                    a=$((a + 1))
+                    sleep 10
+                  done

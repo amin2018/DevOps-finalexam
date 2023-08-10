@@ -1,0 +1,25 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-app
+    spec:
+      containers:
+        - name: my-web-app
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: 80
+          env:
+            - name: DOCKER_USERNAME
+              value: amin2018   # Replace with your Docker Hub username
+            - name: DOCKER_PASSWORD
+              value: dckr_pat_i8Xb3KlCq-8J3fi77dvKiJ4T4rU   # Use the provided Docker Hub access token

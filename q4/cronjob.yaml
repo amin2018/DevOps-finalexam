@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: job-email-pending-pods-info
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: pending-pods-observer
+              image: test_image
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure

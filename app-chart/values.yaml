@@ -1,0 +1,6 @@
+
+replicas: 1
+
+image:
+  repository: amin2018/my_web_app_image
+  tag: latest
