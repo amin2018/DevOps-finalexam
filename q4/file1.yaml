@@ -11,7 +11,9 @@ spec:
           containers:
             - name: pending-pods-container
               image: bitnami/kubectl
-              command: ["/bin/sh", "-c"]
+              command:
+                - "/bin/sh"
+                - "-c"
               args:
                 - |
                   a=0
