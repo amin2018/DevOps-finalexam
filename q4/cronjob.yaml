@@ -10,6 +10,6 @@ spec:
         spec:
           containers:
             - name: pending-pods-observer
-              image: test_image
+              image: test_image:latest
               imagePullPolicy: IfNotPresent
           restartPolicy: OnFailure
